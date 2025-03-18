@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day Planner</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+     <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.header {
+    background-color: #4CAF50;
+    color: yellow;
+    padding: 0.1em;
+    text-align: center;
+    box-shadow: 0 0 10px red;
+}
+.container {
+    padding: 2em 1em;
+}
+.planner {
+    text-align: center;
+}
+.planner {
+    background-color: white;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 10px red;
+}
+.high-priority {
+    background-color: red;
+    color: white;
+}
+
+.medium-priority {
+    background-color: orange;
+    color: white;
+}
+
+.low-priority {
+    background-color: yellow;
+}
+#time{
+    border: 1px solid #ccc;
+}
+#task{
+    width: 80%;
+    border: 1px solid #ccc;
+}
+.sbmt {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sbmt:hover {
+    /* background-color: #45a049; */
+    box-shadow: 0 0 3px red;
+}
+
+.task-list {
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+td {
+    background-color: #fafafa;
+}
+
+td button {
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    margin: 0 5px;
+}
+
+td button.edit {
+    background-color: #4caf4faf;
+    color: white;   
+}
+td button.edit:hover {
+    background-color: green;
+    color: white;   
+}
+td button.delete {
+    background-color: #f44336b6;
+    color: white;
+}
+td button.delete:hover {
+    background-color: red;
+    color: white;
+}
+     </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Day Planner</h1>
+    </div>
+    <div class="container">
+        <div class="planner">
+            <h2>Plan Your Day</h2>
+            <form id="task-form">
+                <label for="time">Select Time:</label>
+                <select id="time" name="time">
+                    <option value="">Select time</option>
+                    <option value="00:00">12:00 AM</option>
+                    <option value="01:00">01:00 AM</option>
+                    <option value="02:00">02:00 AM</option>
+                    <option value="03:00">03:00 AM</option>
+                    <option value="04:00">04:00 AM</option>
+                    <option value="05:00">05:00 AM</option>
+                    <option value="06:00">06:00 AM</option>
+                    <option value="07:00">07:00 AM</option>
+                    <option value="08:00">08:00 AM</option>
+                    <option value="09:00">09:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                    <option value="17:00">05:00 PM</option>
+                    <option value="18:00">06:00 PM</option>
+                    <option value="19:00">07:00 PM</option>
+                    <option value="20:00">08:00 PM</option>
+                    <option value="21:00">09:00 PM</option>
+                    <option value="22:00">10:00 PM</option>
+                    <option value="23:00">11:00 PM</option>
+                </select>
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority">
+                    <option >Select priority</option>
+                    <option class="high-priority" value="High">High</option>
+                    <option class="medium-priority" value="Medium">Medium</option>
+                    <option class="low-priority" value="Low">Low</option>
+                <br>
+                <label for="task">Task:</label>
+                <input type="text" id="task" name="task" placeholder="Enter your task...">
+                <button class="sbmt" type="submit">Add Task</button>
+            </form>
+        </div>
+        <div class="Tasks-list">
+            <h3>Your Tasks</h3>
+            <table id="task-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody ">
+                    <!-- Task rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const taskForm = document.getElementById("task-form");
+    const taskTable = document.getElementById("task-table").getElementsByTagName('tbody')[0];
+
+    taskForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Get values from form inputs
+        const time = document.getElementById("time").value;
+        const task = document.getElementById("task").value;
+        const priority = document.getElementById("priority").value;
+
+        if (task.trim() !== "" && priority !== "Select priority") {
+            // Create a task object with priority
+            const newTask = {
+                time: time,
+                task: task,
+                priority: priority
+            };
+
+            // Save task to localStorage
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.push(newTask);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            // Display the new task in the table
+            displayTasks();
+        }
+
+        // Clear the form
+        taskForm.reset();
+    });
+
+    // Function to display all tasks from localStorage
+    function displayTasks() {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        // Clear the table
+        taskTable.innerHTML = "";
+
+        // Add each task to the table
+        tasks.forEach((task, index) => {
+            const row = taskTable.insertRow();
+
+            // Set the background color based on priority
+            let priorityColor = "";
+            switch (task.priority) {
+                case "High":
+                    priorityColor = "red";
+                    break;
+                case "Medium":
+                    priorityColor = "orange";
+                    break;
+                case "Low":
+                    priorityColor = "yellow";
+                    break;
+                default:
+                    priorityColor = "white";
+            }
+
+            // Apply the priority color to the row
+            row.style.backgroundColor = priorityColor;
+
+            // Create cells for time, task, and actions
+            const timeCell = row.insertCell(0);
+            timeCell.textContent = task.time;
+
+            const taskCell = row.insertCell(1);
+            taskCell.textContent = task.task;
+
+            const prioritycell = row.insertCell(2);
+            prioritycell.textContent = task.priority;
+
+            const actionCell = row.insertCell(3);
+            actionCell.innerHTML = `
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            `;
+
+            // Add event listeners for edit and delete buttons
+            const editButton = actionCell.querySelector(".edit");
+            const deleteButton = actionCell.querySelector(".delete");
+
+            editButton.addEventListener("click", function () {
+                editTask(index);
+            });
+
+            deleteButton.addEventListener("click", function () {
+                deleteTask(index);
+            });
+        });
+    }
+
+    // Function to edit a task
+    function editTask(index) {
+        const tasks = JSON.parse(localStorage.getItem("tasks"));
+        const taskToEdit = tasks[index];
+
+        // Fill the form with the task's data
+        document.getElementById("time").value = taskToEdit.time;
+        document.getElementById("task").value = taskToEdit.task;
+        document.getElementById("priority").value = taskToEdit.priority;
+
+        // Remove the task from the list after editing
+        deleteTask(index);
+    }
+
+    // Function to delete a task
+    function deleteTask(index) {
+        const tasks = JSON.parse(localStorage.getItem("tasks"));
+        tasks.splice(index, 1);
+
+        // Save the updated task list back to localStorage
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        // Update the task table
+        displayTasks();
+    }
+
+    // Display tasks when the page loads
+    displayTasks();
+});
+
+    </script>
+</body>
+</html>
