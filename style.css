@@ -1,0 +1,112 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #efce9260;
+}
+.header {
+    background-image: linear-gradient(to right, blue,red);
+    color: yellow;
+    padding: 0.1em;
+    text-align: center;
+    box-shadow: 0 0 10px red;
+}
+.container {
+    
+    padding: 2em 1em;
+}
+.planner {
+    background-image: linear-gradient(to right,pink,blue);
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(234, 255, 0);
+    text-align: center;
+
+}
+.high-priority {
+    background-color: #ff000069;
+    color: white;
+}
+
+.medium-priority {
+    background-color: #ffa60081;
+    color: white;
+}
+
+.low-priority {
+    background-color: #ffff0057;
+}
+#time,#priority{
+    border: 1px solid #ccc;
+    color:white;
+    background-color: #8000ff65;
+}
+#task{
+    width: 80%;
+    border: 1px solid #ccc;
+    background-image: linear-gradient(to right,rgb(222, 169, 211),rgb(21, 21, 238));
+}
+.sbmt {
+    background-image: linear-gradient(to right,orange,red);
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sbmt:hover {
+    /* background-color: #45a049; */
+    box-shadow: 0 0 3px red;
+}
+
+.task-list {
+    margin-top: 30px;
+}
+#task-table {
+    border-spacing: 0 5px; /* 10px of space between rows */
+}
+
+#task-table th,#task-table td{
+    padding: 10px;
+    text-align: left;
+    width: 25%;/* You can adjust this percentage as needed */
+}
+
+table {
+    width: 100%;
+    border-spacing: 10;
+    margin-top: 20px;
+}
+th {
+    background-color: #c0838380;
+    font-weight: bold;
+    padding: 12px 20px;
+    text-align: center;
+}
+td button {
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    margin: 0 5px;
+}
+
+td button.edit {
+    background-color: #4caf4faf;
+    border-radius: 50px;
+    color: white;   
+}
+td button.edit:hover {
+    background-color: green;
+    color: white;   
+}
+td button.delete {
+    background-color: #f44336b6;
+    border-radius: 50px;
+    color: white;
+}
+td button.delete:hover {
+    background-color: red;
+    color: white;
+}

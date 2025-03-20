@@ -4,117 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day Planner</title>
-    <!-- <link rel="stylesheet" href="/style.css"> -->
-     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #efce929a;
-        }
-        .header {
-            background-image: linear-gradient(to right, blue,red);
-            color: yellow;
-            padding: 0.1em;
-            text-align: center;
-            box-shadow: 0 0 10px red;
-        }
-        .container {
-            
-            padding: 2em 1em;
-        }
-        .planner {
-            background-image: linear-gradient(to right,pink,blue);
-            padding: 1em;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgb(234, 255, 0);
-            text-align: center;
-
-        }
-        .high-priority {
-            background-color: #ff000069;
-            color: white;
-        }
-
-        .medium-priority {
-            background-color: #ffa60081;
-            color: white;
-        }
-
-        .low-priority {
-            background-color: #ffff0057;
-        }
-        #time,#priority{
-            border: 1px solid #ccc;
-            color:white;
-            background-color: #8000ff65;
-        }
-        #task{
-            width: 80%;
-            border: 1px solid #ccc;
-            background-image: linear-gradient(to right,rgb(222, 169, 211),rgb(21, 21, 238));
-        }
-        .sbmt {
-            background-image: linear-gradient(to right,orange,red);
-            color: white;
-            padding: 0.5em 1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .sbmt:hover {
-            /* background-color: #45a049; */
-            box-shadow: 0 0 3px red;
-        }
-
-        .task-list {
-            margin-top: 30px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 12px 20px;
-            text-align: left;
-            /* border-bottom: 3px solid  #efce929a; */
-        }
-
-        th {
-            background-color: #c0838380;
-            font-weight: bold;
-        }
-        td button {
-            padding: 5px 10px;
-            font-size: 12px;
-            cursor: pointer;
-            border: none;
-            margin: 0 5px;
-        }
-
-        td button.edit {
-            background-color: #4caf4faf;
-            border-radius: 50px;
-            color: white;   
-        }
-        td button.edit:hover {
-            background-color: green;
-            color: white;   
-        }
-        td button.delete {
-            background-color: #f44336b6;
-            border-radius: 50px;
-            color: white;
-        }
-        td button.delete:hover {
-            background-color: red;
-            color: white;
-        }
-            </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="header">
@@ -166,146 +56,22 @@
             </form>
         </div>
         <div class="Tasks-list">
-            <h3>Your Tasks</h3>
+            <h3>Your Tasks:</h3>
             <table id="task-table">
                 <thead>
                     <tr>
-                        <th>Time</th>
+                        <th id="time-header">Time</th>
                         <th>Task</th>
-                        <th>Priority</th>
+                        <th id="priority-header">Priority &#9650;&#9660;</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody ">
+                <tbody>
                     <!-- Task rows will be inserted here -->
                 </tbody>
             </table>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    const taskForm = document.getElementById("task-form");
-    const taskTable = document.getElementById("task-table").getElementsByTagName('tbody')[0];
-
-    taskForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        // Get values from form inputs
-        const time = document.getElementById("time").value;
-        const task = document.getElementById("task").value;
-        const priority = document.getElementById("priority").value;
-
-        if (task.trim() !== "" && priority !== "Select priority") {
-            // Create a task object with priority
-            const newTask = {
-                time: time,
-                task: task,
-                priority: priority
-            };
-
-            // Save task to localStorage
-            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            tasks.push(newTask);
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-
-            // Display the new task in the table
-            displayTasks();
-        }
-
-        // Clear the form
-        taskForm.reset();
-    });
-
-    // Function to display all tasks from localStorage
-    function displayTasks() {
-        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-        // Clear the table
-        taskTable.innerHTML = "";
-
-        // Add each task to the table
-        tasks.forEach((task, index) => {
-            const row = taskTable.insertRow();
-
-            // Set the background color based on priority
-            let priorityColor = "";
-            switch (task.priority) {
-                case "High":
-                    priorityColor = "#ff000069";
-                    break;
-                case "Medium":
-                    priorityColor = "#ffa60081";
-                    break;
-                case "Low":
-                    priorityColor = "#ffff0057";
-                    break;
-                default:
-                    priorityColor = "white";
-            }
-
-            // Apply the priority color to the row
-            row.style.backgroundColor = priorityColor;
-
-            // Create cells for time, task, and actions
-            const timeCell = row.insertCell(0);
-            timeCell.textContent = task.time;
-
-            const taskCell = row.insertCell(1);
-            taskCell.textContent = task.task;
-
-            const prioritycell = row.insertCell(2);
-            prioritycell.textContent = task.priority;
-
-            const actionCell = row.insertCell(3);
-            actionCell.innerHTML = `
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-            `;
-
-            // Add event listeners for edit and delete buttons
-            const editButton = actionCell.querySelector(".edit");
-            const deleteButton = actionCell.querySelector(".delete");
-
-            editButton.addEventListener("click", function () {
-                editTask(index);
-            });
-
-            deleteButton.addEventListener("click", function () {
-                deleteTask(index);
-            });
-        });
-    }
-
-    // Function to edit a task
-    function editTask(index) {
-        const tasks = JSON.parse(localStorage.getItem("tasks"));
-        const taskToEdit = tasks[index];
-
-        // Fill the form with the task's data
-        document.getElementById("time").value = taskToEdit.time;
-        document.getElementById("task").value = taskToEdit.task;
-        document.getElementById("priority").value = taskToEdit.priority;
-
-        // Remove the task from the list after editing
-        deleteTask(index);
-    }
-
-    // Function to delete a task
-    function deleteTask(index) {
-        const tasks = JSON.parse(localStorage.getItem("tasks"));
-        tasks.splice(index, 1);
-
-        // Save the updated task list back to localStorage
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-
-        // Update the task table
-        displayTasks();
-    }
-
-    // Display tasks when the page loads
-    displayTasks();
-});
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
