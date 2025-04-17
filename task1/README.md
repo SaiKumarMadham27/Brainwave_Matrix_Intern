@@ -3,7 +3,7 @@ A simple web-based day planner built with HTML, CSS, and JavaScript. This applic
     
     Add tasks with a specified time and priority (High, Medium, Low).
     
-    Edit or delete tasks from the list.
+    Edit or deletes the completed task from the tasks.
     
     Store tasks persistently using localStorage, so tasks remain even after page reloads.
     
@@ -14,6 +14,8 @@ A simple web-based day planner built with HTML, CSS, and JavaScript. This applic
     Time selection in 24-hour format (AM/PM)
     
     Task priority options
+
+    Tasks can be sorted based on priorities or time
     
     Dynamic task list with edit and delete options
     
