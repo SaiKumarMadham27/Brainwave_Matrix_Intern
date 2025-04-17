@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" contents="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopykart</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/d8c24e91eb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <section id="header">
+        <a href="index.html"><i class="fa-solid fa-cart-shopping"><span> Shopy Kart</span></i></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li id="lg-bag"><a class="active" href="cart.html"><i class="fal fa-bags-shopping"></i></a></li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fal fa-bags-shopping"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="name">
+        <h3><span>Shopping Cart</span>&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-cart-shopping"></i></h3>
+    </section>
+
+    <!-- Empty cart message -->
+    <p id="empty-message" class="text-center my-5" style="display: none;">Your cart is empty. Shop Something and fill your cart !!!</p>
+
+    <!-- Cart content wrapper -->
+    <div id="cart-container">
+        <section id="cart" class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Remove</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items"></tbody>
+            </table>
+        </section>
+
+        <section id="cart-bottom" class="container">
+            <div class="row">
+                <div class="coupon col-lg-6 col-md-12 col-12 mb-4">
+                    <div>
+                        <h5>COUPON</h5>
+                        <p>Enter your coupon code if you have one.</p>
+                        <input type="text" placeholder="Coupon Code">
+                        <button class="normal">APPLY COUPON</button>
+                    </div>
+                </div>
+                <div class="total col-lg-6 col-md-12 col-12">
+                    <div>
+                        <h5>CART TOTAL</h5>
+                        <div class="d-flex">
+                            <h6>Subtotal</h6>
+                            <p id="subtotal">₹0.00</p>
+                        </div>
+                        <div class="d-flex">
+                            <h6>Shipping</h6>
+                            <p id="shipping">₹0.00</p>
+                        </div>
+                        <hr class="second-hr">
+                        <div class="d-flex">
+                            <h6>Total</h6>
+                            <p id="total">₹0.00</p>
+                        </div>
+                        <button class="normal ml-auto">PROCEED TO CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletters</h4>
+            <p>Get E-Mail updates about our latest shop and <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="Your Email address">
+            <button class="normal">Sign Up</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">
+            <a href="index.html"><i class="fa-solid fa-cart-shopping"><span> Shopy Kart</span></i></a>
+        </div>
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> Chintal, Medchal, Telangana, India.</p>
+            <p><strong>Phone:</strong>+91 9876543210/ +91 9638527410</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            <div class="follow">
+                <h4>Folllow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="about.html">Contact Us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="cart.html">View Cart</a>
+            <a href="cart.html">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="about.html">Help</a>
+        </div>
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.jpg" alt="">
+                <img src="img/pay/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>Shopykart eCommerce © 2024. All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const tbody = document.getElementById('cart-items');
+            let subtotal = 0;
+
+            function updateCartTable() {
+                tbody.innerHTML = '';
+                subtotal = 0;
+
+                // Show/hide cart container
+                if (cartItems.length === 0) {
+                    document.getElementById('empty-message').style.display = 'block';
+                    document.getElementById('cart-container').style.display = 'none';
+                    return;
+                } else {
+                    document.getElementById('empty-message').style.display = 'none';
+                    document.getElementById('cart-container').style.display = 'block';
+                }
+
+                cartItems.forEach((item, index) => {
+                    const total = item.price * item.quantity;
+                    subtotal += total;
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><button onclick="removeItem(${index})"><i class="fas fa-trash-alt"></i></button></td>
+                        <td><img src="${item.img}" width="50" /></td>
+                        <td>${item.title}</td>
+                        <td>₹${item.price}</td>
+                        <td><input type="number" value="${item.quantity}" min="1" onchange="updateQty(${index}, this.value)"></td>
+                        <td>₹${total}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                document.getElementById('subtotal').innerText = `₹${subtotal}`;
+
+                let shipping = subtotal > 0 ? 50 : 0;
+                document.getElementById('shipping').innerText = `₹${shipping}`;
+                document.getElementById('total').innerText = `₹${subtotal + shipping}`;
+            }
+
+            window.removeItem = function(index) {
+                cartItems.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                updateCartTable();
+            }
+
+            window.updateQty = function(index, qty) {
+                cartItems[index].quantity = parseInt(qty);
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                updateCartTable();
+            }
+
+            updateCartTable();
+        });
+    </script>
+</body>
+</html>
